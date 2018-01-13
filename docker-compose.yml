@@ -8,24 +8,12 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     build:
-      context: ./server
+      context: ./borrow_me
       dockerfile: Dockerfile.server
     command: bash scripts/start-server.sh
     volumes:
-      - .:/server
+      - .:/borrow_me
     ports:
       - "8000:8000"
     depends_on:
       - db
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.frontend
-    command: sh -c ""
-    volumes:
-      - ./frontend:/frontend
-    ports:
-      - "8080:8080"
-    depends_on:
-      - server

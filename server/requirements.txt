@@ -1,4 +1,0 @@
-Django
-django-haystack
-django-cors-headers
-django-nose
