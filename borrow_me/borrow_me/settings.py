@@ -69,6 +69,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'borrow_me.wsgi.application'
 
+# Login
+LOGIN_REDIRECT_URL = '/'
+
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
