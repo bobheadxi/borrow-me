@@ -47,8 +47,21 @@ class ItemView(View):
     def get(self, request):
         '''
         Get items
+        Optionally takes lon, lat params
         '''
-        items = Item.objects.all()
+        kwargs = dict(zip(request.GET.keys(), request.GET.values()))
+        items = Item.objects.filter(available=True)
+
+        lon = kwargs.get('lon', None)
+        lat = kwargs.get('lat', None)
+        if lon or lat:
+            ignore = []
+            for i in items:
+                coord = (i.lon, i.lat)
+                if utils.distance(coord, coord) == -1:
+                    ignore.append(i)
+            items.exclude(id__in=ignore)
+
         context = {
             'items': items
         }
@@ -64,6 +77,12 @@ class ItemView(View):
         '''
         kwargs = dict(zip(request.POST.keys(), request.POST.values()))
         utils.cleanKwargsForItem(kwargs, request.user)
+        if kwargs.get('available', None):
+            p = request.user.profile
+            print p
+            print 'Whoah'
+            # Change to unavailable
+
         i = Item(**kwargs)
         i.save()
 

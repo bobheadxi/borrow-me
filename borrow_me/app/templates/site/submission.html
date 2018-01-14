@@ -7,7 +7,8 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 offset-md-3">
-          <form>
+          <form method="post" action="/item/">
+            {% csrf_token %}
             <header>
               <p class="text-center"><br /><br /><br />Add New Item</p>
             </header>
@@ -58,10 +59,9 @@
             <div class="buttons margin-right-10 form-group">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-secondary margin-5">Cancel</button>
-                <button type="button" class="btn btn-primary margin-5">Submit</button>
+                <button type="submit" class="btn btn-primary margin-5">Submit</button>
               </div>
             </div>
-
 
             <p class="text-center"><br /><br /><br /></p>
           </form>
