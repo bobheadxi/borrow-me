@@ -32,13 +32,12 @@
   <td>{{ form.password.label_tag }}</td>
   <td>{{ form.password }}</td>
 </div>
-
 <div>
   <button type="submit" class="btn btn-primary">Login</button>
   <input type="hidden" name="next" value="{{ next }}" />
 </div>
 </form>
-
+<br>
 <p><a href="{% url 'signup' %}">Create account</a></p>
 
 <!-- {# Assumes you setup the password_reset view in your URLconf #}

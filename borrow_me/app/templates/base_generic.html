@@ -2,49 +2,24 @@
 <html>
     <head>
         <title>Borrow Me!</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	      <link rel="stylesheet" type="text/css" href="site/normalize.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-      <meta charset="utf-8">
     </head>
 
-    <style>
-      body {
-        font-family: 'Barlow', sans-serif;
-        font-size: 1.22em;
-        background-color: GhostWhite ;
-        box-shadow: 0px 1px 8px 0 rgba(0,0,0,0.4);
-        transition: 0.3s;
-        width: 73%;
-        margin: auto;
-        vertical-align: middle;
-        line-height: 15px;
-        line-spacing: 1.5;
-      }
-      .top-margin-lg {
-          margin-top: 5rem;
-      }
-      header {
-        font-size: 1.9em;
-        text-shadow: 1px 2px 5px rgba(0,0,0,0.3);
-      }
-      .buttons{
-        position: absolute;
-        right: 0px;
-        margin-right: 10px;
-      }
-      .margin-5 {
-        margin: 5px;
-      }
-
-    </style>
-
-    <body class="top-margin-lg">
-
+    <body class="container-fluid" style="max-width: 600px; margin-top:20px;">
+      
       <div class="card">
         <div class="card-body">
           {% block content %}{% endblock content %}
         </div>
       </div>
-
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     </body>
 </html>
