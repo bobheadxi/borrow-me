@@ -13,33 +13,45 @@
             </header>
 
             <div class="form-group">
-              <label for="exampleFormControlInput1"><br /><br />Item Type</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1">
+              <label for="itemType"><br /><br />Item Type</label>
+              <input type="text" class="form-control" id="itemType">
             </div>
 
             <div class="form-group">
-              <label for="exampleFormControlInput1"><br />Location</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1">
+              <label for="location"><br />Location</label>
+              <input type="text" class="form-control" id="location">
             </div>
 
             <div class="form-group">
-              <label for="exampleFormControlInput1"><br />Return Time</label>
-              <input type="datetime-local" class="form-control" id="exampleFormControlInput1">
+              <label for="returnTime"><br />Return Time</label>
+              <input type="datetime-local" class="form-control" id="returnTime">
             </div>
 
             <div class="form-group">
-              <label for="exampleFormControlInput1"><br />Rep Value</label>
-              <input type="number" class="form-control" id="exampleFormControlInput1">
+              <label for="repValue"><br />Rep Value</label>
+              <input type="number" class="form-control" id="repValue">
             </div>
 
             <div class="form-group">
-              <label for="exampleFormControlInput1"><br />Image Link</label>
-              <input type="url" class="form-control" id="exampleFormControlInput1">
+              <label for="imageLink"><br />Image Link</label>
+              <input type="url" class="form-control" id="imageLink">
             </div>
 
-            <div class="Item description">
-              <label for="exampleFormControlTextarea1"><br />Item Description</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <div onpageshow="showGeoLocation()">
+              <div class="form-group">
+              <label for="longitude"><br />Longitude</label>
+              <input type="text" class="form-control" id="longitude">
+            </div>
+
+            <div class="form-group">
+              <label for="latitude"><br />Latitude</label>
+              <input type="text" class="form-control" id="latitude">
+            </div>
+            </div>
+
+            <div class="form-group">
+              <label for="itemDescription"><br />Item Description</label>
+              <textarea class="form-control" id="itemDescription" rows="3"></textarea>
             </div>
 
             <p class="text-center"><br /><br /></p>
