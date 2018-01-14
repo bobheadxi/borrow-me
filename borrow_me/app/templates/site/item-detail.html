@@ -23,11 +23,14 @@
 			<div class="row">
 				<div class="col" style="padding-left:0px;">
 					<div class="btn-group btn-group-sm dropup floating-action-button">
-						<button type="button" class="btn btn-info btn-fab btn-raised" style="width:40px; height:40px;" aria-expanded="false">
-							<span style="color:white !important;">{{karma}}</span>
+						<button type="button" class="btn btn-info btn-fab btn-raised" style="width:150px; height:40px;" aria-expanded="false">
+				
+							<a href="{% url 'profile' %}" style="color:white !important;font-size:1em;">My Karma: {{karma}}</a>
 						</button>
 					</div>
 				</div>
+
+
 				<div class="col text-right" style="padding-right:0px;">
 					<div class="btn-group btn-group-sm dropup floating-action-button">
 						<button type="button" class="btn btn-info btn-fab btn-raised" style="width:40px; height:40px;" aria-expanded="false">
@@ -35,6 +38,8 @@
 						</button>
 					</div>
 				</div>
+
+		
 			</div>
 		</div>
 
@@ -76,7 +81,7 @@
 					<form id="js-select-item-form" action="" method="post">
 						<div class="col-sm-offset-10 col-sm-2">
 							<div class="btn-group" role="group" aria-label="Third group">
-								<input type="button" class="btn btn-secondary" style="margin-right: 5px" onclick="hideMe('{{i.id}}')" value="No">
+								<input type="button" class="btn btn-secondary" onclick="hideMe('{{i.id}}')" value="No">
 								<input type="button" class="btn btn-primary" onclick="selectItem()" value="Yes">
 							</div>
 						</div>
