@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html>
+{% extends "base_generic.html" %}
 
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="normalize.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
-	 crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="custom.css">
-	<title>Item Detail</title>
-
-
-</head>
-
-<body>
-
-
+{% block content %}
+	<link rel="stylesheet" type="text/css" href="item-detail.css">
+	<link rel="stylesheet" type="text/css" href="site/custom.css">
 
 	<div class="top-margin-sm bottom-margin-sm content top-margin-md bottom-margin-md top-margin-lg bottom-margin-lg">
+
+		<div id="sent-msg"></div>
 
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -40,33 +29,40 @@
 
 			<div class="card" id="item-detail">
 
-				<img class="card-img-top" src="{{ i.image }}" alt="{{ i.item_type }} - {{ i.description }}">
-				<div class="card-body">
-					<p class="card-text">{{ i.description }}</p>
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">
-						<b>Location: </b> {{ i.location }}</li>
-					<li class="list-group-item">
-						<b>Created At: </b> {{ i.created_at }}</li>
-					<li class="list-group-item">
-						<b>Returned At: </b> {{ i.returned_at }}</li>
-					<li class="list-group-item">
-						<b>Owned By: </b> {{ i.user }}</li>
-					<li class="list-group-item">
-						<b>Karma: </b> {{ i.karma }}</li>
-				</ul>
-				<div class="card-body row">
-					<form id="js-select-item-form">
-						<div class="col-sm-offset-10 col-sm-2">
-							<div class="btn-group" role="group" aria-label="Third group">
-								<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
-								<input type="button" class="btn btn-primary" onclick="selectItem()" value="Yes">
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
+	 		<img 
+	 			class="card-img-top" 
+	 			src=
+	 				"{{ image }}" 
+	 			alt="{{ item_type }} - {{ description }}">
+	  		<div class="card-body">
+	    		<p class="card-text">{{ description }}</p>
+	  		</div>
+			<ul class="list-group list-group-flush">
+			    <li class="list-group-item"><b>Location: </b> {{ location }}</li>
+			    <li class="list-group-item"><b>Created At: </b> {{ created_at }}</li>
+			    <li class="list-group-item"><b>Returned At: </b> {{ returned_at }}</li>
+			    <li class="list-group-item"><b>Owned By: </b> {{ user }}</li>
+			    <li class="list-group-item"><b>Karma: </b> {{ karma }}</li>
+			</ul>
+	  		<div class="card-body row">
+	  			<!-- <form id="js-select-item-form" action="mailto:you@yourdmainhere.com" method="post">
+	  				<div class="col-sm-offset-10 col-sm-2">
+				    	<div class="btn-group" role="group" aria-label="Third group">
+		    				<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
+		    				<input type="submit" class="btn btn-primary" onclick="selectItem()" value="Yes">
+		  				</div>
+				    </div>
+	  			</form>
+ -->
+	  			<form id="js-select-item-form" action="" method="post">
+	  				<div class="col-sm-offset-10 col-sm-2">
+				    	<div class="btn-group" role="group" aria-label="Third group">
+		    				<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
+		    				<input type="button" class="btn btn-primary" onclick="selectItem()" value="Yes">
+		  				</div>
+				    </div>
+	  			</form>
+	  		</div>
 		</div>
 		{% endfor %}
 
@@ -78,13 +74,7 @@
 
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	 crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	 crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
-	 crossorigin="anonymous"></script>
-	<script type="text/javascript" src="item-detail.js"></script>
-</body>
 
-</html>
+	<script type="text/javascript" src="item-detail.js"></script>
+
+{% endblock %}
