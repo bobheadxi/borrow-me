@@ -62,7 +62,6 @@ class ItemView(View):
         '''
         Add item
         '''
-        # kwargs = dict(request.POST)
         kwargs = dict(zip(request.POST.keys(), request.POST.values()))
         utils.cleanKwargsForItem(kwargs, request.user)
         i = Item(**kwargs)
@@ -75,9 +74,19 @@ class ItemView(View):
         '''
         Modify item
         '''
-        kwargs = kwargs = dict(zip(request.PUT.keys(), request.PUT.values()))
+        kwargs = dict(zip(request.PUT.keys(), request.PUT.values()))
         utils.cleanKwargsForItem(kwargs, request.user)
         i = Item(**kwargs)
         i.save()
 
         return render(request, 'index.html')
+
+
+class UserView(View):
+    @method_decorator(login_required)
+    def put(self, request) :
+        '''
+        Modify karma
+        '''
+        request.user.karma = request.user.karma - 5
+        request.user.save

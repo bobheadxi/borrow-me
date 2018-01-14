@@ -19,7 +19,7 @@ class Item(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    reputation = models.IntegerField(blank=False, default=10)
+    karma = models.IntegerField(blank=False, default=10)
 
 
 
