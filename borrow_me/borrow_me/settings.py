@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import smtplib
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,6 +28,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+SENDER_GMAIL = "freeeyeout@gmail.com"
+SENDER_PWD = "freeeyeout1"
+
+SMTPSERVER = smtplib.SMTP("smtp.gmail.com", 587)
+SMTPSERVER.ehlo()
+SMTPSERVER.starttls()
+SMTPSERVER.ehlo()
+SMTPSERVER.login(SENDER_GMAIL, SENDER_PWD)
 
 # Application definition
 

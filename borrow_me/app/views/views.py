@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from app.models import Item, Profile
 from app.forms import UserCreateForm
+from datetime import datetime
 import psycopg2
 import utils
 
@@ -39,6 +40,16 @@ def signup(request):
         form = UserCreateForm()
     return render(request, 'signup.html', {'form': form})
 
+@login_required(login_url='/accounts/login')
+def profile(request):
+    context = {
+        'user' : request.user,
+        'borrowing' : Item.objects.filter(available = False, borrowed_by = request.user),
+        'lending' : Item.objects.filter(user = request.user)
+    }
+
+    return render(request, 'registration/profile.html', context)
+
 class ItemView(View):
     '''
     View for accessing and adding items!
@@ -61,7 +72,7 @@ class ItemView(View):
                 item_coord = (i.lon, i.lat)
                 user_coord = (lon, lat)
                 if utils.distance(item_coord, user_coord) == -1:
-                    ignore.append(i)
+                    ignore.append(i.id)
             items.exclude(id__in=ignore)
 
         context = {
@@ -77,23 +88,47 @@ class ItemView(View):
         Add/modify item ((submit))
         '''
         kwargs = dict(zip(request.POST.keys(), request.POST.values()))
-        utils.cleanKwargsForItem(kwargs, request.user)
-        if kwargs.get('available', None):
+        if kwargs.get('available', None) is not None:
             p = request.user.profile
-            print p
-            print 'Whoah'
-            # Change to unavailable
+            i = Item.objects.get(id=kwargs['id'])
+            # Logic for borrowing
+            if kwargs['available'] == 'True':
+                if p.karma < i.karma:
+                    # TODO : error message
+                    print 'not enough karma'
+                    return redirect('item')
+                p.karma -= i.karma
+                p.save()
+                i.available = False
+                i.borrowed_by = request.user
+                i.borrowed_at = datetime.now()
+                i.save()
+                i.user.profile.karma += 5
+                i.user.profile.save()
+                utils.sendLoanedEmail(i.user.email, i.item_type, request.user)
+                utils.sendLoanerEmail(request.user.email, i.item_type, i.return_at)
+            # Logic for returning amnd deleting
+            else:
+                if request.user == i.user:
+                    i.delete()
+                else:
+                    i.returned_at = datetime.now()
+                    i.borrowed_by = None
+                    i.save()
+                    utils.sendReturnedEmail(i.user.email, i.item.type, request.user)
 
-        i = Item(**kwargs)
-        i.save()
+        else:
+            utils.cleanKwargsForItem(kwargs, request.user)
+            i = Item(**kwargs)
+            i.save()
 
         return redirect('item')
 
+# TODO : Deprecate?
 class UserView(View):
     '''
     Endpoint for users
     '''
-
     @method_decorator(login_required)
     def get(self, request):
         '''
@@ -117,4 +152,4 @@ class UserView(View):
         p.save()
         return redirect('item')
         # return render(request, 'index.html')
-        
+

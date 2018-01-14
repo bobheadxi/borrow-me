@@ -102,3 +102,6 @@ ENV/
 
 #DS
 .DS_Store
+
+#Inertia
+.inertia/

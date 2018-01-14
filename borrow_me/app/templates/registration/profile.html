@@ -1,62 +1,111 @@
-{% extends "base_generic.html" %}
+{% extends "base_generic.html" %} {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-left">
+            <a href="{% url 'item'%}">Back</a>
+        </div>
 
-{% block content %}
-<p>Hello {{ user.username }}</p>  
+        <div class="col">
+            <p>Hello {{ user.username }}</p>
 
-<div>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="borrowing-tab" data-toggle="tab" href="#borrowing" role="tab" aria-controls="borrowing" aria-selected="true">Borrowing</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="lending-tab" data-toggle="tab" href="#lending" role="tab" aria-controls="lending" aria-selected="false">Lending</a>
-                </li>
-                
-              </ul>
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="borrowing" role="tabpanel" aria-labelledby="borrowing-tab">
-                        <div class="card" id="item-detail-i">
-
-                                <img 
-                                    class="card-img-top" 
-                                    src="{{ i.image }}"
-                                    alt="{{ i.item_type }} - {{ i.description }}">
-                                <div class="card-body">
-                                    <p class="card-text">{{ i.description }}</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><b>Location: </b> {{ i.location }}</li>
-                                    <li class="list-group-item"><b>Created At: </b> {{ i.created_at }}</li>
-                                    <li class="list-group-item"><b>Return At: </b> {{ i.return_at }}</li>
-                                    <li class="list-group-item"><b>Owned By: </b> {{ i.user }}</li>
-                                    <li class="list-group-item"><b>Karma: </b> {{ i.karma }}</li>
-                                </ul>
-                                
-                            </div>
+        </div>
+        <div class="col text-right">
+            <a href="{% url 'logout'%}">Logout</a>
+        </div>
 
 
-                </div>
-                <div class="tab-pane fade" id="lending" role="tabpanel" aria-labelledby="lending-tab">Lending</div>
-                <div class="card" id="item-detail-i">
-
-                        <img 
-                            class="card-img-top" 
-                            src="{{ i.image }}"
-                            alt="{{ i.item_type }} - {{ i.description }}">
-                        <div class="card-body">
-                            <p class="card-text">{{ i.description }}</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><b>Location: </b> {{ i.location }}</li>
-                            <li class="list-group-item"><b>Created At: </b> {{ i.created_at }}</li>
-                            <li class="list-group-item"><b>Return At: </b> {{ i.return_at }}</li>
-                            <li class="list-group-item"><b>Owned By: </b> {{ i.user }}</li>
-                            <li class="list-group-item"><b>Karma: </b> {{ i.karma }}</li>
-                        </ul>
-                        
-                    </div>
-            </div>
+    </div>
 </div>
 
-<a href="{% url 'logout'%}">Click here to logout.</a>
+<div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="borrowing-tab" data-toggle="tab" href="#borrowing" role="tab" aria-controls="borrowing" aria-selected="true">Borrowing</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="lending-tab" data-toggle="tab" href="#lending" role="tab" aria-controls="lending" aria-selected="false">Lending</a>
+        </li>
+
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="borrowing" role="tabpanel" aria-labelledby="borrowing-tab">
+
+            {% for i in borrowing %}
+            <div class="card" id="item-detail-i">
+                <img class="card-img-top" src="{{ i.image }}" alt="{{ i.item_type }} - {{ i.description }}">
+                <div class="card-body">
+                    <p class="card-text">{{ i.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <b>Location: </b> {{ i.location }}</li>
+                    <li class="list-group-item">
+                        <b>Created At: </b> {{ i.created_at }}</li>
+                    <li class="list-group-item">
+                        <b>Return At: </b> {{ i.return_at }}</li>
+                    <li class="list-group-item">
+                        <b>Owned By: </b> {{ i.user }}</li>
+                    <li class="list-group-item">
+                        <b>Karma: </b> {{ i.karma }}</li>
+                </ul>
+                <div class="card-body row">
+                    <form id="js-select-item-form" action="/item/" method="post">
+                        {% csrf_token %}
+                        <div class="col-sm-offset-10 col-sm-2">
+                            <div class="btn-group" role="group" aria-label="Third group">
+                                <input type="hidden" name="id" value="{{ i.id }}">
+                                <input type="hidden" name="available" value="False">
+                                <input type="submit" class="btn btn-primary" value="I have returned this!">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+
+        <div class="tab-pane fade" id="lending" role="tabpanel" aria-labelledby="lending-tab">
+
+            {% for i in lending %}
+            <div class="card" id="item-detail-ii">
+                <img class="card-img-top" src="{{ i.image }}" alt="{{ i.item_type }} - {{ i.description }}">
+                <div class="card-body">
+                    <p class="card-text">{{ i.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <b>Borrowed by: </b> {{ i.borrowed_by }}</li>
+                    <li class="list-group-item">
+                        <b>Location: </b> {{ i.location }}</li>
+                    <li class="list-group-item">
+                        <b>Created At: </b> {{ i.created_at }}</li>
+                    <li class="list-group-item">
+                        <b>Return At: </b> {{ i.return_at }}</li>
+                    <li class="list-group-item">
+                        <b>Owned By: </b> {{ i.user }}</li>
+                    <li class="list-group-item">
+                        <b>Karma: </b> {{ i.karma }}</li>
+                </ul>
+                <div class="card-body row">
+                    <form id="js-select-item-form" action="/item/" method="post">
+                        {% csrf_token %}
+                        <div class="col-sm-offset-10 col-sm-2">
+                            <div class="btn-group" role="group" aria-label="Third group">
+                                <input type="hidden" name="id" value="{{ i.id }}">
+                                <input type="hidden" name="available" value="False">
+                                <input type="submit" class="btn btn-primary" value="Remove">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+
 {% endblock %}
