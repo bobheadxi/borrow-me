@@ -48,23 +48,23 @@ class ItemView(View):
         '''
         Get items
         '''
-        items = Item.objects.get()
+        items = Item.objects.all()
         context = {
             'items': items
         }
 
         # TODO: get location of user if available
 
-        return render(request, 'index.html', context)
+        return render(request, 'site/item-detail.html', context)
 
     @method_decorator(login_required)
     def post(self, request):
         '''
         Add item
         '''
-        kwargs = dict(request.POST)
-        del kwargs['csrfmiddlewaretoken']
-        kwargs['user'] = request.user
+        # kwargs = dict(request.POST)
+        kwargs = dict(zip(request.POST.keys(), request.POST.values()))
+        utils.cleanKwargsForItem(kwargs, request.user)
         i = Item(**kwargs)
         i.save()
 
@@ -75,8 +75,8 @@ class ItemView(View):
         '''
         Modify item
         '''
-        kwargs = dict(request.PUT)
-        kwargs['user'] = request.user
+        kwargs = kwargs = dict(zip(request.PUT.keys(), request.PUT.values()))
+        utils.cleanKwargsForItem(kwargs, request.user)
         i = Item(**kwargs)
         i.save()
 
