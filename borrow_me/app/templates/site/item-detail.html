@@ -1,8 +1,8 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-	<link rel="stylesheet" type="text/css" href="item-detail.css">
-	<link rel="stylesheet" type="text/css" href="site/custom.css">
+<link rel="stylesheet" type="text/css" href="item-detail.css">
+<link rel="stylesheet" type="text/css" hred="site/custom.css">
 
 	<div class="top-margin-sm bottom-margin-sm content top-margin-md bottom-margin-md top-margin-lg bottom-margin-lg">
 
@@ -42,7 +42,7 @@
 		
 		<br>
 		{% for i in items %}
-		<div class="card">
+		<div id="{{i.id}}" class="card">
 			<div class="page-header">
 				<h1>{{ i.item_type }}</h1>
 				<hr>
@@ -76,7 +76,7 @@
 					<form id="js-select-item-form" action="" method="post">
 						<div class="col-sm-offset-10 col-sm-2">
 							<div class="btn-group" role="group" aria-label="Third group">
-								<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
+								<input type="button" class="btn btn-secondary" style="margin-right: 5px" onclick="hideMe('{{i.id}}')" value="No">
 								<input type="button" class="btn btn-primary" onclick="selectItem()" value="Yes">
 							</div>
 						</div>
