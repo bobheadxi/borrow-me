@@ -92,7 +92,7 @@ class ItemView(View):
             p = request.user.profile
             i = Item.objects.get(id=kwargs['id'])
             # Logic for borrowing
-            if kwargs['available']:
+            if kwargs['available'] == 'True':
                 if p.karma < i.karma:
                     # TODO : error message
                     print 'not enough karma'
