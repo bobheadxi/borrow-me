@@ -8,7 +8,7 @@ from django.contrib import admin
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('id',
                     'user',
-                    'karma')
+                    'karma',)
 
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('id',
@@ -24,6 +24,5 @@ class ItemAdmin(admin.ModelAdmin):
                     'lat',
                     'lon',)
 
-#admin.site.register(User, UserAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Item, ItemAdmin)
