@@ -42,8 +42,6 @@ def signup(request):
 
 @login_required(login_url='/accounts/login')
 def profile(request):
-
-
     context = {
         'user' : request.user,
         'borrowing' : Item.objects.filter(available = False, borrowed_by = request.user),
@@ -51,11 +49,6 @@ def profile(request):
     }
 
     return render(request, 'registration/profile.html', context)
-
-
-
-
-
 
 class ItemView(View):
     '''
@@ -99,7 +92,7 @@ class ItemView(View):
             p = request.user.profile
             i = Item.objects.get(id=kwargs['id'])
             # Logic for borrowing
-            if kwargs['available']:
+            if kwargs['available'] == 'True':
                 if p.karma < i.karma:
                     # TODO : error message
                     context = {
@@ -118,12 +111,15 @@ class ItemView(View):
                 i.user.profile.save()
                 utils.sendLoanedEmail(i.user.email, i.item_type, request.user)
                 utils.sendLoanerEmail(request.user.email, i.item_type, i.return_at)
-            # Logic for returning
+            # Logic for returning amnd deleting
             else:
-                # TODO: stuff
-                i.returned_at = datetime.now()
-                # TODO: more stuff
-                utils.sendReturnedEmail(i.user.email, i.item.type, request.user)
+                if request.user == i.user:
+                    i.delete()
+                else:
+                    i.returned_at = datetime.now()
+                    i.borrowed_by = None
+                    i.save()
+                    utils.sendReturnedEmail(i.user.email, i.item.type, request.user)
 
         else:
             utils.cleanKwargsForItem(kwargs, request.user)
@@ -132,11 +128,11 @@ class ItemView(View):
 
         return redirect('item')
 
+# TODO : Deprecate?
 class UserView(View):
     '''
     Endpoint for users
     '''
-
     @method_decorator(login_required)
     def get(self, request):
         '''
