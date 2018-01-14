@@ -1,0 +1,62 @@
+
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+	.content {
+		width: 20rem;
+		margin-left: auto;
+		margin-right: auto;
+		word-wrap: break-word;
+	}
+
+	.top-margin-sm {
+		margin-top: 5rem;
+	}
+
+	.bottom-margin-sm {
+		margin-bottom: 5rem;
+	}
+
+	.floating-action-button {
+		position: fixed !important;
+	  	top: 20px;
+	  	margin-left: 18rem;
+	  	margin-right: 5px;
+	}
+  
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+
+	.content {
+		width: 25rem;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.top-margin-sm {
+		margin-top: 5rem;
+	}
+
+	.bottom-margin-sm {
+		margin-bottom: 5rem;
+	}
+
+	.floating-action-button {
+		position: fixed !important;
+	  	top: 20px;
+	  	margin-left: 25rem;
+	  	margin-right: 5px;
+	}
+
+  
+}
