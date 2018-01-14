@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from app.models import Item, Profile
 from app.forms import UserCreateForm
+from datetime import datetime
 import psycopg2
 import utils
 
@@ -61,7 +62,7 @@ class ItemView(View):
                 item_coord = (i.lon, i.lat)
                 user_coord = (lon, lat)
                 if utils.distance(item_coord, user_coord) == -1:
-                    ignore.append(i)
+                    ignore.append(i.id)
             items.exclude(id__in=ignore)
 
         context = {
@@ -77,15 +78,31 @@ class ItemView(View):
         Add/modify item ((submit))
         '''
         kwargs = dict(zip(request.POST.keys(), request.POST.values()))
-        utils.cleanKwargsForItem(kwargs, request.user)
-        if kwargs.get('available', None):
-            p = request.user.profile
-            print p
-            print 'Whoah'
-            # Change to unavailable
+        if kwargs.get('available', None) is not None:
+            # Logic for borrowing
+            if kwargs['available']:
+                p = request.user.profile
+                i = Item.objects.get(id=kwargs['id'])
+                if p.karma < i.karma:
+                    # TODO : error message
+                    print 'not enough karma'
+                    return redirect('item')
+                i.available = False
+                i.borrowed_by = request.user
+                i.borrowed_at = datetime.now()
+                i.save()
+                utils.sendEmail(i.user.email, i.item_type, request.user.email)
 
-        i = Item(**kwargs)
-        i.save()
+            # Logic for returning
+            else:
+                i = kwargs['item']
+
+                return redirect('item')
+
+        else:
+            utils.cleanKwargsForItem(kwargs, request.user)
+            i = Item(**kwargs)
+            i.save()
 
         return redirect('item')
 

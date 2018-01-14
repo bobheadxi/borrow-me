@@ -74,10 +74,13 @@
 						</div>
 					</form> -->
 					<form id="js-select-item-form" action="" method="post">
+						{% csrf_token %}
 						<div class="col-sm-offset-10 col-sm-2">
 							<div class="btn-group" role="group" aria-label="Third group">
+								<input type="hidden" name="id" value="{{ i.id }}">
+								<input type="hidden" name="available" value="{{ i.available }}">
 								<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
-								<input type="button" class="btn btn-primary" onclick="selectItem()" value="Yes">
+								<input type="submit" class="btn btn-primary" value="I need this">
 							</div>
 						</div>
 					</form>
