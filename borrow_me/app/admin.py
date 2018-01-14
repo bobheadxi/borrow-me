@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from .models import User, Item
+# from .models import User
+from .models import Item
+from django.contrib import admin
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('id',
@@ -24,5 +26,5 @@ class ItemAdmin(admin.ModelAdmin):
                     'lon',)
 
 
-admin.site.register(User, UserAdmin)
+#admin.site.register(User, UserAdmin)
 admin.site.register(Item, ItemAdmin)
