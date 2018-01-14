@@ -16,6 +16,11 @@ class Item(models.Model):
     lat = models.DecimalField(max_digits = 10, decimal_places = 4, blank = False)
     lon = models.DecimalField(max_digits = 10, decimal_places = 4,blank = False)
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    reputation = models.IntegerField(blank=False, default=10)
+
+
 
 # class User(models.Model):
 #     user_id = models.ForeignKey(User, on_delete=models.CASCADE)

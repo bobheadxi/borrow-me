@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 # from .models import User
-from .models import Item
+from .models import Item, Profile
 from django.contrib import admin
 
 class UserAdmin(admin.ModelAdmin):
@@ -12,9 +12,15 @@ class UserAdmin(admin.ModelAdmin):
                     'user_karma',
                     'email',)
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('id',
+                    'user',
+                    'reputation')
+
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('item_type',
+    list_display = ('id',
+                    'item_type',
                     'location',
                     'created_at',
                     'returned_at',
@@ -27,4 +33,5 @@ class ItemAdmin(admin.ModelAdmin):
 
 
 #admin.site.register(User, UserAdmin)
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Item, ItemAdmin)
