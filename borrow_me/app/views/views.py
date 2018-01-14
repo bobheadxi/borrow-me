@@ -138,6 +138,8 @@ class UserView(View):
         context = {
             'user': request.user.profile
         }
+
+        
         return render(request, 'index.html', context)
         
     @method_decorator(login_required)
