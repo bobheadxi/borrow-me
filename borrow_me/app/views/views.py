@@ -90,9 +90,10 @@ class UserView(View):
         '''
         Modify karma or requesting user
         '''
-        val = request.karma_diff
+        kwargs = dict(zip(request.POST.keys(), request.POST.values()))
+        karma = int(kwargs['karma_diff'])
         p = request.user.profile
-        p.karma = p.karma - 5
+        p.karma = p.karma + karma
         p.save()
         return render(request, 'index.html')
         
