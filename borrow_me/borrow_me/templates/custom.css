@@ -1,4 +1,92 @@
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
 
+@media (min-width: 1024px) {
+  
+  	.content {
+		max-width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+		word-wrap: break-word;
+	}
+
+	.top-margin-lg {
+		margin-top: 5rem;
+	}
+
+	.bottom-margin-lg {
+		margin-bottom: 5rem;
+	}
+
+
+	.floating-action-button {
+		position: fixed !important;
+	  	top: 2rem;
+	  	margin-left: calc(100% - 30%);
+	}
+
+  
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+	.content {
+		max-width: 40rem;
+		margin-left: auto;
+		margin-right: auto;
+		word-wrap: break-word;
+	}
+
+	.top-margin-md {
+		margin-top: 5rem;
+	}
+
+	.bottom-margin-md {
+		margin-bottom: 5rem;
+	}
+
+	.floating-action-button {
+		position: fixed !important;
+	  	top: 2rem;
+	  	margin-left: 650px;
+	}
+
+  
+}
+
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+
+	.content {
+		width: 25rem;
+		margin-left: auto;
+		margin-right: auto;
+		word-wrap: break-word;
+	}
+
+	.top-margin-sm {
+		margin-top: 5rem;
+	}
+
+	.bottom-margin-sm {
+		margin-bottom: 5rem;
+	}
+
+	.floating-action-button {
+		position: fixed !important;
+	  	top: 20px;
+	  	margin-left: 410px;
+	}
+
+  
+}
 
 /* 
   ##Device = Most of the Smartphones Mobiles (Portrait)
@@ -25,38 +113,7 @@
 	.floating-action-button {
 		position: fixed !important;
 	  	top: 20px;
-	  	margin-left: 18rem;
-	  	margin-right: 5px;
+	  	margin-left: 280px;
 	}
-  
-}
-
-/* 
-  ##Device = Low Resolution Tablets, Mobiles (Landscape)
-  ##Screen = B/w 481px to 767px
-*/
-@media (min-width: 481px) and (max-width: 767px) {
-
-	.content {
-		width: 25rem;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.top-margin-sm {
-		margin-top: 5rem;
-	}
-
-	.bottom-margin-sm {
-		margin-bottom: 5rem;
-	}
-
-	.floating-action-button {
-		position: fixed !important;
-	  	top: 20px;
-	  	margin-left: 25rem;
-	  	margin-right: 5px;
-	}
-
   
 }
