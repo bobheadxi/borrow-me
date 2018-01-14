@@ -19,7 +19,7 @@ from .views import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
-    url(r'^submit/', TemplateView.as_view(template_name='site/submission.html')),
+    url(r'^submit/', TemplateView.as_view(template_name='site/submission.html'), name='submit'),
     url(r'^item/', views.ItemView.as_view(), name='item'),
     url(r'^user/', views.UserView.as_view(), name='user'),
 ]

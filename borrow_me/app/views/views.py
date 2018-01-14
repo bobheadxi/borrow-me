@@ -8,7 +8,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from app.models import Item, Profile
-from django.contrib.auth.forms import UserCreationForm
+from app.forms import UserCreateForm
 import psycopg2
 import utils
 
@@ -19,14 +19,14 @@ def home(request):
     '''
     # TODO : get location from request
 
-    return render(request, 'index.html')
+    return redirect('item')
 
 def signup(request):
     '''
     Signup stuff.
     '''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserCreateForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -36,7 +36,7 @@ def signup(request):
             login(request, user)
             return redirect('/')
     else:
-        form = UserCreationForm()
+        form = UserCreateForm()
     return render(request, 'signup.html', {'form': form})
 
 class ItemView(View):
@@ -48,27 +48,46 @@ class ItemView(View):
     def get(self, request):
         '''
         Get items
+        Optionally takes lon, lat params
         '''
-        items = Item.objects.all()
+        kwargs = dict(zip(request.GET.keys(), request.GET.values()))
+        items = Item.objects.filter(available=True)
+
+        lon = kwargs.get('lon', None)
+        lat = kwargs.get('lat', None)
+        if lon and lat:
+            ignore = []
+            for i in items:
+                item_coord = (i.lon, i.lat)
+                user_coord = (lon, lat)
+                if utils.distance(item_coord, user_coord) == -1:
+                    ignore.append(i)
+            items.exclude(id__in=ignore)
+
         context = {
+            'karma': request.user.profile.karma,
             'items': items
         }
-
-        # TODO: get location of user if available
 
         return render(request, 'site/item-detail.html', context)
 
     @method_decorator(login_required)
     def post(self, request):
         '''
-        Add/modify item
+        Add/modify item ((submit))
         '''
         kwargs = dict(zip(request.POST.keys(), request.POST.values()))
         utils.cleanKwargsForItem(kwargs, request.user)
+        if kwargs.get('available', None):
+            p = request.user.profile
+            print p
+            print 'Whoah'
+            # Change to unavailable
+
         i = Item(**kwargs)
         i.save()
 
-        return render(request, 'index.html')
+        return redirect('item')
 
 class UserView(View):
     '''
@@ -96,5 +115,6 @@ class UserView(View):
         p = request.user.profile
         p.karma = p.karma + karma
         p.save()
-        return render(request, 'index.html')
+        return redirect('item')
+        # return render(request, 'index.html')
         

@@ -19,6 +19,7 @@ class Item(models.Model):
     description = models.CharField(max_length=50)
     lat = models.DecimalField(max_digits=10, decimal_places=4, blank=False)
     lon = models.DecimalField(max_digits=10, decimal_places=4, blank=False)
+    available = models.BooleanField(blank=False, default=True) # true if available
 
 class Profile(models.Model):
     '''
