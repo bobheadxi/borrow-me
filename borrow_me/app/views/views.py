@@ -40,6 +40,23 @@ def signup(request):
         form = UserCreateForm()
     return render(request, 'signup.html', {'form': form})
 
+@login_required(login_url='/accounts/login')
+def profile(request):
+
+
+    context = {
+        'user' : request.user,
+        'borrowing' : Item.objects.filter(available = False, borrowed_by = request.user),
+        'lending' : Item.objects.filter(user = request.user)
+    }
+
+    return render(request, 'registration/profile.html', context)
+
+
+
+
+
+
 class ItemView(View):
     '''
     View for accessing and adding items!
