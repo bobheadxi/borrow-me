@@ -3,5 +3,60 @@
 {% block content %}
 <p>Hello {{ user.username }}</p>  
 
+<div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="borrowing-tab" data-toggle="tab" href="#borrowing" role="tab" aria-controls="borrowing" aria-selected="true">Borrowing</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="lending-tab" data-toggle="tab" href="#lending" role="tab" aria-controls="lending" aria-selected="false">Lending</a>
+                </li>
+                
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="borrowing" role="tabpanel" aria-labelledby="borrowing-tab">
+                        <div class="card" id="item-detail-i">
+
+                                <img 
+                                    class="card-img-top" 
+                                    src="{{ i.image }}"
+                                    alt="{{ i.item_type }} - {{ i.description }}">
+                                <div class="card-body">
+                                    <p class="card-text">{{ i.description }}</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><b>Location: </b> {{ i.location }}</li>
+                                    <li class="list-group-item"><b>Created At: </b> {{ i.created_at }}</li>
+                                    <li class="list-group-item"><b>Return At: </b> {{ i.return_at }}</li>
+                                    <li class="list-group-item"><b>Owned By: </b> {{ i.user }}</li>
+                                    <li class="list-group-item"><b>Karma: </b> {{ i.karma }}</li>
+                                </ul>
+                                
+                            </div>
+
+
+                </div>
+                <div class="tab-pane fade" id="lending" role="tabpanel" aria-labelledby="lending-tab">Lending</div>
+                <div class="card" id="item-detail-i">
+
+                        <img 
+                            class="card-img-top" 
+                            src="{{ i.image }}"
+                            alt="{{ i.item_type }} - {{ i.description }}">
+                        <div class="card-body">
+                            <p class="card-text">{{ i.description }}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><b>Location: </b> {{ i.location }}</li>
+                            <li class="list-group-item"><b>Created At: </b> {{ i.created_at }}</li>
+                            <li class="list-group-item"><b>Return At: </b> {{ i.return_at }}</li>
+                            <li class="list-group-item"><b>Owned By: </b> {{ i.user }}</li>
+                            <li class="list-group-item"><b>Karma: </b> {{ i.karma }}</li>
+                        </ul>
+                        
+                    </div>
+            </div>
+</div>
+
 <a href="{% url 'logout'%}">Click here to logout.</a>
 {% endblock %}
