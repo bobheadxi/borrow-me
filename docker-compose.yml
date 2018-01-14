@@ -10,7 +10,7 @@ services:
     build:
       context: ./borrow_me
       dockerfile: Dockerfile.server
-    command: bash scripts/start-server.sh
+    command: bash borrow_me/scripts/start-server.sh
     volumes:
       - ./borrow_me/:/server/
     ports:
