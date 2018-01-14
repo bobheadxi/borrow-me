@@ -7,9 +7,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from borrow_me.app.models import Item
-from django.contrib.auth.forms import UserCreationForm
 from app.models import Item
+from django.contrib.auth.forms import UserCreationForm
 import psycopg2
 import utils
 
