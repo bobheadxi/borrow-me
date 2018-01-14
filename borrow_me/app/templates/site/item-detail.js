@@ -1,5 +1,5 @@
 function selectItem() {
 	
-   alert("Email already sent! Please check your email.");
+   $('#sent-msg').append("<div class='alert alert-success' role='alert'> Email Sent. Please wait for our response email.</div>");
  
 }
