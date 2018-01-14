@@ -10,18 +10,24 @@
 
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-    			<li class="breadcrumb-item"><a href="#">Home</a></li>
-    			<li class="breadcrumb-item"><a href="#">Items</a></li>
-    			<li class="breadcrumb-item active" aria-current="page">{{ item_type }}</li>
-  			</ol>
+				<li class="breadcrumb-item">
+					<a href="#">Home</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Items</a>
+				</li>
+				<!-- <li class="breadcrumb-item active" aria-current="page">{{ item_type }}</li> -->
+			</ol>
 		</nav>
 
-		<div class="page-header">
-			<h1>{{ item_type }}</h1>
-			<hr>
-		</div>
+		{% for i in items %}
+		<div class="card">
+			<div class="page-header">
+				<h1>{{ i.item_type }}</h1>
+				<hr>
+			</div>
 
-		<div class="card" id="item-detail">
+			<div class="card" id="item-detail">
 
 	 		<img 
 	 			class="card-img-top" 
@@ -58,10 +64,12 @@
 	  			</form>
 	  		</div>
 		</div>
+		{% endfor %}
 
 		<div class="btn-group btn-group-sm dropup floating-action-button">
-  			<button type="button" class="btn btn-info btn-fab btn-raised" aria-expanded="false"><i class="material-icons">add</i>
-  			</button>
+			<button type="button" class="btn btn-info btn-fab btn-raised" aria-expanded="false">
+				<i class="material-icons">add</i>
+			</button>
 		</div>
 
 	</div>

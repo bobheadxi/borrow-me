@@ -12,7 +12,7 @@ services:
       dockerfile: Dockerfile.server
     command: bash scripts/start-server.sh
     volumes:
-      - .:/borrow_me
+      - ./borrow_me/:/server/
     ports:
       - "8000:8000"
     depends_on:

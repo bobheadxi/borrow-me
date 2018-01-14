@@ -2,32 +2,22 @@
 from __future__ import unicode_literals
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import TemplateView, View
+from django.views import View
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from app.models import Item
 from django.contrib.auth.forms import UserCreationForm
 import psycopg2
 import utils
 
-# request.user is the username
 @login_required(login_url='/accounts/login')
 def home(request):
     '''
     This is our homepage view. It displays a list of available and relevant items within 10km.
     '''
     # TODO : get location from request
-
-    return render(request, 'index.html')
-
-def additem(request):
-    '''
-    This creates a new item.
-    '''
-    i = Item()
-    i.save()
 
     return render(request, 'index.html')
 
@@ -53,35 +43,50 @@ class ItemView(View):
     View for accessing and adding items!
     '''
 
+    @method_decorator(login_required)
     def get(self, request):
         '''
         Get items
         '''
-        items = Item.objects.get()
+        items = Item.objects.all()
         context = {
-            items: items
+            'items': items
         }
 
         # TODO: get location of user if available
 
-        return render(request, 'index.html', context)
+        return render(request, 'site/item-detail.html', context)
 
+    @method_decorator(login_required)
     def post(self, request):
         '''
         Add item
         '''
-        kwargs = dict(request.POST)
+        kwargs = dict(zip(request.POST.keys(), request.POST.values()))
+        utils.cleanKwargsForItem(kwargs, request.user)
         i = Item(**kwargs)
         i.save()
 
         return render(request, 'index.html')
 
+    @method_decorator(login_required)
     def put(self, request):
         '''
         Modify item
         '''
-        kwargs = dict(request.PUT)
+        kwargs = dict(zip(request.PUT.keys(), request.PUT.values()))
+        utils.cleanKwargsForItem(kwargs, request.user)
         i = Item(**kwargs)
         i.save()
 
         return render(request, 'index.html')
+
+
+class UserView(View):
+    @method_decorator(login_required)
+    def put(self, request) :
+        '''
+        Modify karma
+        '''
+        request.user.karma = request.user.karma - 5
+        request.user.save
