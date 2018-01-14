@@ -54,11 +54,12 @@ class ItemView(View):
 
         lon = kwargs.get('lon', None)
         lat = kwargs.get('lat', None)
-        if lon or lat:
+        if lon and lat:
             ignore = []
             for i in items:
-                coord = (i.lon, i.lat)
-                if utils.distance(coord, coord) == -1:
+                item_coord = (i.lon, i.lat)
+                user_coord = (lon, lat)
+                if utils.distance(item_coord, user_coord) == -1:
                     ignore.append(i)
             items.exclude(id__in=ignore)
 
@@ -66,14 +67,12 @@ class ItemView(View):
             'items': items
         }
 
-        # TODO: get location of user if available
-
         return render(request, 'site/item-detail.html', context)
 
     @method_decorator(login_required)
     def post(self, request):
         '''
-        Add/modify item
+        Add/modify item ((submit))
         '''
         kwargs = dict(zip(request.POST.keys(), request.POST.values()))
         utils.cleanKwargsForItem(kwargs, request.user)
