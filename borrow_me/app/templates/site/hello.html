@@ -37,14 +37,15 @@
 	 			alt="Card image cap">
 	  		<div class="card-body">
 	    		<p class="card-text">Item Description</p>
-	  		</div>
+			  </div>
+			{% for i in items %}
 			<ul class="list-group list-group-flush">
-			    <li class="list-group-item"><b>Item Type: </b>...</li>
-			    <li class="list-group-item"><b>Location: </b>...</li>
-			    <li class="list-group-item"><b>Created At: </b>...</li>
-			    <li class="list-group-item"><b>Returned At: </b>...</li>
-			    <li class="list-group-item"><b>Owned By: </b>...</li>
-			    <li class="list-group-item"><b>Karma: </b>...</li>
+			    <li class="list-group-item"><b>Item Type: </b> { i.item_type } </li>
+			    <li class="list-group-item"><b>Location: </b> { i.location } </li>
+			    <li class="list-group-item"><b>Created At: </b> { i.created_at } </li>
+			    <li class="list-group-item"><b>To Be Returned At: </b> { i.returned_at } </li>
+			    <li class="list-group-item"><b>Owned By: </b> { i.user } </li>
+			    <li class="list-group-item"><b>Karma: </b> { i.karma  } </li>
 			</ul>
 	  		<div class="card-body row">
 			    <div class="col-sm-offset-10 col-sm-2">
@@ -53,7 +54,8 @@
 	    				<button type="button" class="btn btn-warning">No</button>
 	  				</div>
 			    </div>
-	  		</div>
+			  </div>
+			  {% endfor %}
 		</div>
 
 		<div class="btn-group btn-group-sm dropup floating-action-button">

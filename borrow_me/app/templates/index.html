@@ -1,7 +1,22 @@
 <p>Hello world!</p>
 
 {% block content %}
-<a href='/accounts/profile'>View your profile!</a>
 
 <a href="{% url 'logout'%}">Click here to logout.</a>
 {% endblock %}
+
+<form method="post" action="/testing/">
+    {% csrf_token %}
+
+    <div>
+        <label for="say">Test item type</label>
+        <input name="item_type" id="item_type" value="Cookie">
+    </div>
+    <div>
+        <label for="to">Test location </label>
+        <input name="location" value="Bathroom">
+    </div>
+    <div>
+        <button>Send my greetings</button>
+    </div>
+</form>

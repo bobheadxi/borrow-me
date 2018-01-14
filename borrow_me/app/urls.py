@@ -18,4 +18,5 @@ from .views import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
+    url(r'^testing/', views.ItemView.as_view(), name='item')
 ]
