@@ -79,25 +79,30 @@ class ItemView(View):
         '''
         kwargs = dict(zip(request.POST.keys(), request.POST.values()))
         if kwargs.get('available', None) is not None:
+            p = request.user.profile
+            i = Item.objects.get(id=kwargs['id'])
             # Logic for borrowing
             if kwargs['available']:
-                p = request.user.profile
-                i = Item.objects.get(id=kwargs['id'])
                 if p.karma < i.karma:
                     # TODO : error message
                     print 'not enough karma'
                     return redirect('item')
+                p.karma -= i.karma
+                p.save()
                 i.available = False
                 i.borrowed_by = request.user
                 i.borrowed_at = datetime.now()
                 i.save()
-                utils.sendEmail(i.user.email, i.item_type, request.user.email)
-
+                i.user.profile.karma += 5
+                i.user.profile.save()
+                utils.sendLoanedEmail(i.user.email, i.item_type, request.user)
+                utils.sendLoanerEmail(request.user.email, i.item_type, i.return_at)
             # Logic for returning
             else:
-                i = kwargs['item']
-
-                return redirect('item')
+                # TODO: stuff
+                i.returned_at = datetime.now()
+                # TODO: more stuff
+                utils.sendReturnedEmail(i.user.email, i.item.type, request.user)
 
         else:
             utils.cleanKwargsForItem(kwargs, request.user)
