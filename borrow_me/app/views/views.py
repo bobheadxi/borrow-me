@@ -8,7 +8,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from app.models import Item, Profile
-from django.contrib.auth.forms import UserCreationForm
+from app.forms import UserCreateForm
 import psycopg2
 import utils
 
@@ -19,14 +19,14 @@ def home(request):
     '''
     # TODO : get location from request
 
-    return render(request, 'index.html')
+    return redirect('item')
 
 def signup(request):
     '''
     Signup stuff.
     '''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserCreateForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -36,7 +36,7 @@ def signup(request):
             login(request, user)
             return redirect('/')
     else:
-        form = UserCreationForm()
+        form = UserCreateForm()
     return render(request, 'signup.html', {'form': form})
 
 class ItemView(View):
@@ -65,6 +65,7 @@ class ItemView(View):
             items.exclude(id__in=ignore)
 
         context = {
+            'karma': request.user.profile.karma,
             'items': items
         }
 
@@ -86,7 +87,7 @@ class ItemView(View):
         i = Item(**kwargs)
         i.save()
 
-        return render(request, 'index.html')
+        return redirect('item')
 
 class UserView(View):
     '''
@@ -114,5 +115,6 @@ class UserView(View):
         p = request.user.profile
         p.karma = p.karma + karma
         p.save()
-        return render(request, 'index.html')
+        return redirect('item')
+        # return render(request, 'index.html')
         

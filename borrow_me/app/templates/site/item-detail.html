@@ -19,7 +19,28 @@
 				<!-- <li class="breadcrumb-item active" aria-current="page">{{ item_type }}</li> -->
 			</ol>
 		</nav>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col" style="padding-left:0px;">
+					<div class="btn-group btn-group-sm dropup floating-action-button">
+						<button type="button" class="btn btn-info btn-fab btn-raised" style="width:40px; height:40px;" aria-expanded="false">
+							<span style="color:white !important;">{{karma}}</span>
+						</button>
+					</div>
+				</div>
+				<div class="col text-right" style="padding-right:0px;">
+					<div class="btn-group btn-group-sm dropup floating-action-button">
+						<button type="button" class="btn btn-info btn-fab btn-raised" style="width:40px; height:40px;" aria-expanded="false">
+							<a class="material-icons" href="{% url 'submit' %}" style="color:white !important;font-size:2em;">+</a>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
+		
+		
+		<br>
 		{% for i in items %}
 		<div class="card">
 			<div class="page-header">
@@ -29,52 +50,42 @@
 
 			<div class="card" id="item-detail">
 
-	 		<img 
-	 			class="card-img-top" 
-	 			src=
-	 				"{{ image }}" 
-	 			alt="{{ item_type }} - {{ description }}">
-	  		<div class="card-body">
-	    		<p class="card-text">{{ i.description }}</p>
-	  		</div>
-			<ul class="list-group list-group-flush">
-			    <li class="list-group-item"><b>Location: </b> {{ i.location }}</li>
-			    <li class="list-group-item"><b>Created At: </b> {{ i.created_at }}</li>
-			    <li class="list-group-item"><b>Return At: </b> {{ i.return_at }}</li>
-			    <li class="list-group-item"><b>Owned By: </b> {{ i.user }}</li>
-			    <li class="list-group-item"><b>Karma: </b> {{ i.karma }}</li>
-			</ul>
-	  		<div class="card-body row">
-	  			<!-- <form id="js-select-item-form" action="mailto:you@yourdmainhere.com" method="post">
-	  				<div class="col-sm-offset-10 col-sm-2">
-				    	<div class="btn-group" role="group" aria-label="Third group">
-		    				<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
-		    				<input type="submit" class="btn btn-primary" onclick="selectItem()" value="Yes">
-		  				</div>
-				    </div>
-	  			</form>
- -->
-	  			<form id="js-select-item-form" action="" method="post">
-	  				<div class="col-sm-offset-10 col-sm-2">
-				    	<div class="btn-group" role="group" aria-label="Third group">
-		    				<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
-		    				<input type="button" class="btn btn-primary" onclick="selectItem()" value="Yes">
-		  				</div>
-				    </div>
-	  			</form>
-	  		</div>
+				<img 
+					class="card-img-top" 
+					src="{{ i.image }}"
+					alt="{{ i.item_type }} - {{ i.description }}">
+				<div class="card-body">
+					<p class="card-text">{{ i.description }}</p>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item"><b>Location: </b> {{ i.location }}</li>
+					<li class="list-group-item"><b>Created At: </b> {{ i.created_at }}</li>
+					<li class="list-group-item"><b>Return At: </b> {{ i.return_at }}</li>
+					<li class="list-group-item"><b>Owned By: </b> {{ i.user }}</li>
+					<li class="list-group-item"><b>Karma: </b> {{ i.karma }}</li>
+				</ul>
+				<div class="card-body row">
+					<!-- <form id="js-select-item-form" action="mailto:you@yourdmainhere.com" method="post">
+						<div class="col-sm-offset-10 col-sm-2">
+							<div class="btn-group" role="group" aria-label="Third group">
+								<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
+								<input type="submit" class="btn btn-primary" onclick="selectItem()" value="Yes">
+							</div>
+						</div>
+					</form> -->
+					<form id="js-select-item-form" action="" method="post">
+						<div class="col-sm-offset-10 col-sm-2">
+							<div class="btn-group" role="group" aria-label="Third group">
+								<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
+								<input type="button" class="btn btn-primary" onclick="selectItem()" value="Yes">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
+		<br>
 		{% endfor %}
 
-		<div class="btn-group btn-group-sm dropup floating-action-button">
-			<button type="button" class="btn btn-info btn-fab btn-raised" aria-expanded="false">
-				<a class="material-icons" href="{% url 'submit' %}">add</a>
-			</button>
-		</div>
-
 	</div>
-
-
-	<script type="text/javascript" src="item-detail.js"></script>
-
 {% endblock %}
