@@ -1,0 +1,72 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+	<link rel="stylesheet" type="text/css" href="item-detail.css">
+	<link rel="stylesheet" type="text/css" href="site/custom.css">
+
+	<div class="top-margin-sm bottom-margin-sm content top-margin-md bottom-margin-md top-margin-lg bottom-margin-lg">
+
+		<div id="sent-msg"></div>
+
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+    			<li class="breadcrumb-item"><a href="#">Home</a></li>
+    			<li class="breadcrumb-item"><a href="#">Items</a></li>
+    			<li class="breadcrumb-item active" aria-current="page">{{ item_type }}</li>
+  			</ol>
+		</nav>
+
+		<div class="page-header">
+			<h1>{{ item_type }}</h1>
+			<hr>
+		</div>
+
+		<div class="card" id="item-detail">
+
+	 		<img 
+	 			class="card-img-top" 
+	 			src=
+	 				"{{ image }}" 
+	 			alt="{{ item_type }} - {{ description }}">
+	  		<div class="card-body">
+	    		<p class="card-text">{{ description }}</p>
+	  		</div>
+			<ul class="list-group list-group-flush">
+			    <li class="list-group-item"><b>Location: </b> {{ location }}</li>
+			    <li class="list-group-item"><b>Created At: </b> {{ created_at }}</li>
+			    <li class="list-group-item"><b>Returned At: </b> {{ returned_at }}</li>
+			    <li class="list-group-item"><b>Owned By: </b> {{ user }}</li>
+			    <li class="list-group-item"><b>Karma: </b> {{ karma }}</li>
+			</ul>
+	  		<div class="card-body row">
+	  			<!-- <form id="js-select-item-form" action="mailto:you@yourdmainhere.com" method="post">
+	  				<div class="col-sm-offset-10 col-sm-2">
+				    	<div class="btn-group" role="group" aria-label="Third group">
+		    				<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
+		    				<input type="submit" class="btn btn-primary" onclick="selectItem()" value="Yes">
+		  				</div>
+				    </div>
+	  			</form>
+ -->
+	  			<form id="js-select-item-form" action="" method="post">
+	  				<div class="col-sm-offset-10 col-sm-2">
+				    	<div class="btn-group" role="group" aria-label="Third group">
+		    				<input type="button" class="btn btn-secondary" style="margin-right: 5px" value="No">
+		    				<input type="button" class="btn btn-primary" onclick="selectItem()" value="Yes">
+		  				</div>
+				    </div>
+	  			</form>
+	  		</div>
+		</div>
+
+		<div class="btn-group btn-group-sm dropup floating-action-button">
+  			<button type="button" class="btn btn-info btn-fab btn-raised" aria-expanded="false"><i class="material-icons">add</i>
+  			</button>
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript" src="item-detail.js"></script>
+
+{% endblock %}

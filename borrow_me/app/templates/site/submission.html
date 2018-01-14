@@ -1,43 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
-    <title></title>
-    <style>
-      body {
-        font-family: 'Barlow', sans-serif;
-        font-size: 1.22em;
-        background-color: GhostWhite ;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        transition: 0.3s;
-        width: 80%;
-        margin: auto;
-        vertical-align: middle;
-        line-height: 15px;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-      }
-      header {
-        font-size: 1.9em;
-        text-shadow: 1px 2px 5px rgba(0,0,0,0.3);
-      }
-      .buttons{
-        position: absolute;
-        right: 0px;
-        margin-right: 10px;
-      }
-      .margin-5 {
-        margin:5px;
-      }
+{% extends "base_generic.html" %}
 
-    </style>
+{% block content %}
 
-  </head>
-
-  <body>
-
-
+  <div class="top-margin-lg">
+    <p class="text-center"><br /><br /><br /></p>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -86,16 +52,11 @@
 
 
             <p class="text-center"><br /><br /><br /></p>
-
-            <p class="text-center"><br /><br /><br /></p>
           </form>
         </div>
       </div>
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-  </body>
-</html>
+    <p class="text-center"><br /><br /><br /></p>
+    </div>
+{% endblock %}
