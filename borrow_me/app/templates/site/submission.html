@@ -43,17 +43,15 @@
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
             </div>
 
-            <div onpageshow="showGeoLocation()"> 
-              <div class="form-group"> 
+            <div class="form-group" hidden> 
               <label for="longitude"><br />Longitude</label> 
-              <input type="text" class="form-control" id="longitude"> 
+              <input type="text" class="form-control" id="longitude" name="lon" value="49.2606052"> 
             </div> 
  
-            <div class="form-group"> 
+            <div class="form-group" hidden> 
               <label for="latitude"><br />Latitude</label> 
-              <input type="text" class="form-control" id="latitude"> 
+              <input type="text" class="form-control" id="latitude" name="lat" value="-123.2459938"> 
             </div> 
-            </div>
 
             <p class="text-center"><br /><br /></p>
             <div class="buttons margin-right-10 form-group">
@@ -68,7 +66,30 @@
         </div>
       </div>
     </div>
+    <script>
+      function showGeoLocation() {
+          let x = document.getElementById("longitude");
+          let y = document.getElementById("latitude");
+          getLocation();
 
+          function getLocation() {
+              if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(showPosition);
+              } else {
+                  alert("Geolocation is not supported by this browser.");
+              }
+          }
+
+          function showPosition(position) {
+              y.value = position.coords.latitude;
+              x.value = position.coords.longitude; 
+          }
+      }
+
+      window.onload = function() {
+        showGeoLocation();
+      }
+    </script>
     <p class="text-center"><br /><br /><br /></p>
     </div>
 {% endblock %}
