@@ -2,20 +2,30 @@
 
 {% block content %}
   <h2>Sign up</h2>
+  
+  {% if form.errors %}
+    <div class="alert alert-secondary" role="alert">
+      <span>{{form.errors}}</span>
+    </div>
+  {% endif %}
+
   <form method="post">
     {% csrf_token %}
-    <!-- {{ form.as_table }} -->
-    {% for field in form %}
-        <div class="fieldWrapper">
-            <div class="alert alert-secondary" role="alert" hidden>
-              <span>{{ field.errors }}</span>
-            </div>
-            {{ field.label_tag }} {{ field }}
-            {% if field.help_text %}
-            <p class="help">{{ field.help_text|safe }}</p>
-            {% endif %}
-        </div>
-    {% endfor %}
-    <button type="submit">Sign up</button>
+      <div>
+          <td>{{ form.username.label_tag }}</td>
+          <td>{{ form.username }}</td>
+      </div>
+      <br>
+      <div>
+        <td>{{ form.password1.label_tag }}</td>
+        <td>{{ form.password1 }}</td>
+      </div>
+      <br>
+      <div>
+          <td>{{ form.password2.label_tag }}</td>
+          <td>{{ form.password2 }}</td>
+      </div>
+
+    <button type="submit" class="btn btn-primary m-t-10 m-b-10">Sign up</button>
   </form>
 {% endblock %}
