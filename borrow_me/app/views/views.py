@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from app.models import Item
+from app.models import Item, Profile
 from django.contrib.auth.forms import UserCreationForm
 import psycopg2
 import utils
@@ -60,7 +60,7 @@ class ItemView(View):
     @method_decorator(login_required)
     def post(self, request):
         '''
-        Add item
+        Add/modify item
         '''
         kwargs = dict(zip(request.POST.keys(), request.POST.values()))
         utils.cleanKwargsForItem(kwargs, request.user)
@@ -69,24 +69,30 @@ class ItemView(View):
 
         return render(request, 'index.html')
 
-    @method_decorator(login_required)
-    def put(self, request):
-        '''
-        Modify item
-        '''
-        kwargs = dict(zip(request.PUT.keys(), request.PUT.values()))
-        utils.cleanKwargsForItem(kwargs, request.user)
-        i = Item(**kwargs)
-        i.save()
-
-        return render(request, 'index.html')
-
-
 class UserView(View):
+    '''
+    Endpoint for users
+    '''
+
     @method_decorator(login_required)
-    def put(self, request) :
+    def get(self, request):
         '''
-        Modify karma
+        Retrieve and display data of user 
         '''
-        request.user.karma = request.user.karma - 5
-        request.user.save
+        # TODO
+        context = {
+            'user': request.user.profile
+        }
+        return render(request, 'index.html', context)
+        
+    @method_decorator(login_required)
+    def post(self, request):
+        '''
+        Modify karma or requesting user
+        '''
+        val = request.karma_diff
+        p = request.user.profile
+        p.karma = p.karma - 5
+        p.save()
+        return render(request, 'index.html')
+        
