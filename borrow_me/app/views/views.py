@@ -102,8 +102,12 @@ class ItemView(View):
             if kwargs['available']:
                 if p.karma < i.karma:
                     # TODO : error message
-                    print 'not enough karma'
-                    return redirect('item')
+                    context = {
+                        'karma': request.user.profile.karma,
+                        'items': Item.objects.filter(available=True),
+                        'errorMsg': 'Not enough karma'
+                    }
+                    return render(request, 'site/item-detail.html', context)
                 p.karma -= i.karma
                 p.save()
                 i.available = False
@@ -136,14 +140,14 @@ class UserView(View):
     @method_decorator(login_required)
     def get(self, request):
         '''
-        Retrieve and display data of user 
+        Retrieve and display data of user
         '''
         # TODO
         context = {
             'user': request.user.profile
         }
         return render(request, 'index.html', context)
-        
+
     @method_decorator(login_required)
     def post(self, request):
         '''
@@ -156,4 +160,3 @@ class UserView(View):
         p.save()
         return redirect('item')
         # return render(request, 'index.html')
-        

@@ -4,19 +4,23 @@
 <div class="container-fluid">
     <div class="row">
             <div class="col text-left" >
-                    <a href="{% url 'item'%}">Back</a> 
+                    <a href="{% url 'item'%}">Back</a>
                 </div>
 
         <div class="col">
-            <p>Hello {{ user.username }}</p>  
+            <p>Hello {{ user.username }}</p>
 
         </div>
         <div class="col text-right" >
-            <a href="{% url 'logout'%}">Logout</a> 
+            <a href="{% url 'logout'%}">Logout</a>
         </div>
 
-        
+
     </div>
+</div>
+
+
+
 </div>
 
 <div>
@@ -27,15 +31,15 @@
                 <li class="nav-item">
                   <a class="nav-link" id="lending-tab" data-toggle="tab" href="#lending" role="tab" aria-controls="lending" aria-selected="false">Lending</a>
                 </li>
-                
+
               </ul>
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="borrowing" role="tabpanel" aria-labelledby="borrowing-tab">
-                        
+
                     {% for i in borrowing %}
                     <div class="card" id="item-detail-i">
-                        <img 
-                            class="card-img-top" 
+                        <img
+                            class="card-img-top"
                             src="{{ i.image }}"
                             alt="{{ i.item_type }} - {{ i.description }}">
                         <div class="card-body">
@@ -48,19 +52,19 @@
                             <li class="list-group-item"><b>Owned By: </b> {{ i.user }}</li>
                             <li class="list-group-item"><b>Karma: </b> {{ i.karma }}</li>
                         </ul>
-                        
+
                     </div>
                     {% endfor %}
 
                 </div>
 
-                
+
                 <div class="tab-pane fade" id="lending" role="tabpanel" aria-labelledby="lending-tab">
 
                         {% for i in lending %}
                         <div class="card" id="item-detail-ii">
-                            <img 
-                                class="card-img-top" 
+                            <img
+                                class="card-img-top"
                                 src="{{ i.image }}"
                                 alt="{{ i.item_type }} - {{ i.description }}">
                             <div class="card-body">
@@ -73,12 +77,12 @@
                                 <li class="list-group-item"><b>Owned By: </b> {{ i.user }}</li>
                                 <li class="list-group-item"><b>Karma: </b> {{ i.karma }}</li>
                             </ul>
-                            
+
                         </div>
                         {% endfor %}
 
                 </div>
-              
+
             </div>
 </div>
 

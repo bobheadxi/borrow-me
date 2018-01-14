@@ -24,7 +24,7 @@
 				<div class="col" style="padding-left:0px;">
 					<div class="btn-group btn-group-sm dropup floating-action-button">
 						<button type="button" class="btn btn-info btn-fab btn-raised" style="width:150px; height:40px;" aria-expanded="false">
-				
+
 							<a href="{% url 'profile' %}" style="color:white !important;font-size:1em;">My Karma: {{karma}}</a>
 						</button>
 					</div>
@@ -39,13 +39,26 @@
 					</div>
 				</div>
 
-		
+
 			</div>
 		</div>
 
-		
-		
+
+
 		<br>
+
+		<div>
+		  {% if errorMsg %}
+		  <div class="alert alert-danger" role="alert" id="errorMsg">
+		      <span>
+		          {{ errorMsg }}
+		          <b>Returned to Item page.</b>
+		      </span>
+		  </div>
+		    {% endif %}
+
+
+
 		{% for i in items %}
 		<div id="{{i.id}}" class="card">
 			<div class="page-header">
@@ -55,8 +68,8 @@
 
 			<div class="card" id="item-detail">
 
-				<img 
-					class="card-img-top" 
+				<img
+					class="card-img-top"
 					src="{{ i.image }}"
 					alt="{{ i.item_type }} - {{ i.description }}">
 				<div class="card-body">
