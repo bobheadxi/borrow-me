@@ -2,91 +2,61 @@
 
 {% block content %}
 
+  <div class="top-margin-lg">
+    <p class="text-center"><br /><br /><br /></p>
     <div class="container-fluid">
-      <!-- <div class="row">
-        <div class="col"> -->
-          <form method="post" action="/item/">
-            {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <form>
             <header>
-              <h3 class="text-center"><br /><br /><br />Add New Item</h3>
+              <p class="text-center"><br /><br /><br />Add New Item</p>
             </header>
 
             <div class="form-group">
               <label for="exampleFormControlInput1"><br /><br />Item Type</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1" name="item_type">
+              <input type="text" class="form-control" id="exampleFormControlInput1">
             </div>
 
             <div class="form-group">
               <label for="exampleFormControlInput1"><br />Location</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1" name="location">
+              <input type="text" class="form-control" id="exampleFormControlInput1">
             </div>
 
             <div class="form-group">
               <label for="exampleFormControlInput1"><br />Return Time</label>
-              <input type="datetime-local" class="form-control" id="exampleFormControlInput1" name="return_at">
+              <input type="datetime-local" class="form-control" id="exampleFormControlInput1">
             </div>
 
             <div class="form-group">
               <label for="exampleFormControlInput1"><br />Rep Value</label>
-              <input type="number" class="form-control" id="exampleFormControlInput1" name="karma">
+              <input type="number" class="form-control" id="exampleFormControlInput1">
             </div>
 
             <div class="form-group">
               <label for="exampleFormControlInput1"><br />Image Link</label>
-              <input type="url" class="form-control" id="exampleFormControlInput1" name="image">
+              <input type="url" class="form-control" id="exampleFormControlInput1">
             </div>
 
             <div class="Item description">
               <label for="exampleFormControlTextarea1"><br />Item Description</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
-
-            <div class="form-group" hidden> 
-              <label for="longitude"><br />Longitude</label> 
-              <input type="text" class="form-control" id="longitude" name="lon" value="49.2606052"> 
-            </div> 
- 
-            <div class="form-group" hidden> 
-              <label for="latitude"><br />Latitude</label> 
-              <input type="text" class="form-control" id="latitude" name="lat" value="-123.2459938"> 
-            </div> 
 
             <p class="text-center"><br /><br /></p>
             <div class="buttons margin-right-10 form-group">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary margin-5">							
-                  <a href="{% url 'item' %}" style="color:white !important;">Cancel</a>
-                 </button>
-                <button type="submit" class="btn btn-primary margin-5">Submit</button>
+                <button type="button" class="btn btn-secondary margin-5">Cancel</button>
+                <button type="button" class="btn btn-primary margin-5">Submit</button>
               </div>
             </div>
+
+
+            <p class="text-center"><br /><br /><br /></p>
           </form>
         </div>
       </div>
-    <script>
-      function showGeoLocation() {
-          let x = document.getElementById("longitude");
-          let y = document.getElementById("latitude");
-          getLocation();
+    </div>
 
-          function getLocation() {
-              if (navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition(showPosition);
-              } else {
-                  alert("Geolocation is not supported by this browser.");
-              }
-          }
-
-          function showPosition(position) {
-              y.value = position.coords.latitude;
-              x.value = position.coords.longitude; 
-          }
-      }
-
-      window.onload = function() {
-        showGeoLocation();
-      }
-    </script>
     <p class="text-center"><br /><br /><br /></p>
     </div>
 {% endblock %}
